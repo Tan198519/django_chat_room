@@ -24,8 +24,7 @@ SECRET_KEY = 'django-insecure-p+7x%+^!#djch7vo+=bv^sh#q0-zw!vk!vl%gds9t_zyvs23^b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# '.herokuapp.com', '127.0.0.1'
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -118,11 +117,10 @@ STATIC_URL = '/static/'
 ASGI_APPLICATION = "core.routing.application"
 CHANNELL_LAYERS = {
     "default": {
-        #"BACKEND": "channels.layers.InMemoryChannelLayer"
 
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],   #[os.environ['REDIS_URL']],
+            "hosts": [('127.0.0.1', 6379)], 
         },
     },
 }
@@ -132,12 +130,12 @@ CHANNELL_LAYERS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": os.environ['REDIS_URL'],
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
-#         }
-#     }
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ['REDIS_URL'],
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        }
+    }
+}
